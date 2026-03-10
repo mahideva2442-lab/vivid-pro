@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivid Pro | Attendance App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="app">
+        <section id="auth-screen" class="screen">
+            <div class="card">
+                <h1>Vivid Pro</h1>
+                <p>Enter your institutional email to proceed</p>
+                <input type="email" id="email-input" placeholder="name@university.edu">
+                <div class="btn-group">
+                    <button class="primary" onclick="signIn('lecturer')">Lecturer Login</button>
+                    <button class="secondary" onclick="signIn('student')">Student Login</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="lecturer-screen" class="screen hidden">
+            <div class="dashboard">
+                <div class="card">
+                    <h3>Start New Session</h3>
+                    <input type="text" id="subject" placeholder="Subject Name">
+                    <input type="number" id="total-days" placeholder="Total Working Days" value="30">
+                    <input type="number" id="session-mins" placeholder="Valid for (Minutes)" value="5">
+                    <button class="primary" onclick="startSession()">Generate QR & Code</button>
+                </div>
+                <div class="card center">
+                    <h3>Active Session</h3>
+                    <div id="qr-container"></div>
+                    <div id="active-code" class="huge-text">---</div>
+                    <p id="timer" class="danger-text"></p>
+                </div>
+            </div>
+            <button class="back-link" onclick="logout()">← Sign Out</button>
+        </section>
+
+        <section id="student-screen" class="screen hidden">
+            <div class="dashboard">
+                <div class="card">
+                    <h3>Mark Presence</h3>
+                    <p id="welcome-student"></p>
+                    <input type="text" id="stu-code-input" placeholder="Enter 5-Digit Code">
+                    <button class="primary" onclick="submitAttendance()">Submit Code</button>
+                </div>
+                <div class="card">
+                    <h3>Attendance Analytics</h3>
+                    <div id="risk-alert"></div>
+                    <canvas id="analyticsChart"></canvas>
+                </div>
+            </div>
+            <button class="back-link" onclick="logout()">← Sign Out</button>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
